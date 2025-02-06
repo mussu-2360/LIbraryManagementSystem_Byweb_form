@@ -1,0 +1,76 @@
+
+-----------------------------------------------
+
+sql code for library management system:
+
+
+CREATE TABLE Books (
+    BookID INT PRIMARY KEY IDENTITY,
+    Title NVARCHAR(100),
+    Author NVARCHAR(100),
+    Category NVARCHAR(50),
+    SerialNumber NVARCHAR(50) UNIQUE,
+    Availability BIT
+);
+
+
+
+select * from Books;
+
+
+CREATE TABLE Users (
+    UserID INT PRIMARY KEY IDENTITY,
+    Username NVARCHAR(50),
+    Password NVARCHAR(255),
+    Role NVARCHAR(10) -- 'Admin' or 'User'
+);
+
+insert into Users values('user1','1234','Admin');
+insert into Users  values('abc','1234','user'),
+('user2','1234','user'),
+('user3','1234','Admin'),
+('user4','1234','Admin');
+
+select * from Users;
+
+CREATE TABLE Memberships (
+    MembershipID INT PRIMARY KEY IDENTITY,
+    MemberName NVARCHAR(100),
+    Duration NVARCHAR(10),
+    StartDate DATE,
+    EndDate DATE
+);
+
+select * from Memberships;
+
+
+insert into Memberships (MemberName,Duration)values('aashu','30');
+
+CREATE TABLE Transactions (
+    TransactionID INT PRIMARY KEY IDENTITY,
+    BookID INT FOREIGN KEY REFERENCES Books(BookID),
+    UserID INT FOREIGN KEY REFERENCES Users(UserID),
+    IssueDate DATE,
+    ReturnDate DATE,
+    Fine DECIMAL(10, 2) DEFAULT 0
+);
+select * from Transactions;
+
+INSERT INTO Transactions (BookID, UserID, IssueDate, Fine)
+VALUES (1, 2, '2025-01-01', 0.00),
+(1, 2, '2025-01-01',  25.00),
+(1, 2, '2025-01-01',  56.00),
+(1, 2, '2025-01-01',  0.00),
+(1, 2, '2025-01-01',  23.00),
+(1, 2, '2025-01-01',  0.00); 
+
+
+
+
+
+
+
+
+
+
+
